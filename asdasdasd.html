@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Elecciones</title>
+    <style>
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .candidate {
+            border: 1px solid #ccc;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .candidate:hover {
+            background-color: #f0f0f0;
+        }
+
+        .selected {
+            background-color: #3498db;
+            color: #fff;
+        }
+
+        .selected:hover {
+            background-color: #3498db;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Estilos para las páginas */
+        #pagePresidents {
+            background-color: #ffffff; /* Blanco */
+        }
+
+        #pageDiputados {
+            background-color: #c7e2c7; /* Verde pálido */
+        }
+
+        #pageDistrito {
+            background-color: #b3e6ff; /* Celeste */
+        }
+
+        #pageAlcalde {
+            background-color: #ffccff; /* Rosado pálido */
+        }
+
+        #pageParlamento {
+            background-color: #ffffcc; /* Amarillo pálido */
+        }
+
+        /* Estilos para la página de Resumen */
+        #pageResumen {
+            text-align: center;
+            padding: 20px;
+        }
+	#pageResumen {
+    background: #f2f2f2 url('bandera.jpg') no-repeat center center fixed;
+	padding:40px;
+    background-size: cover;
+    z-index: -1;
+	}
+
+        #pageResumen h1 {
+            color: #333333;
+        }
+
+        #pageResumen p {
+            margin-bottom: 20px;
+        }
+
+        #resultList {
+            list-style: none;
+            padding: 0;
+        }
+
+        #resultList li {
+            margin-bottom: 10px;
+        }
+
+        /* Estilos para el menú de ingreso de DPI y contraseña */
+        #menuForm {
+            text-align: center;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        #menuForm input[type="text"],
+        #menuForm input[type="password"] {
+            padding: 10px;
+            margin-right: 10px;
+        }
+
+        #menuForm input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- Menú de ingreso de DPI y contraseña -->
+    <div id="menuForm">
+        <form id="loginForm" onsubmit="submitLogin(event)">
+            <input type="text" id="dpiInput" placeholder="Ingrese su DPI" required>
+            <input type="password" id="passwordInput" placeholder="Ingrese su contraseña" required>
+            <input type="submit" value="Ingresar">
+        </form>
+    </div>
+
+    <div id="pagePresidents" class="hidden">
+        <h1>Elecciones de Presidentes</h1>
+
+        <div class="grid-container">
+        <div class="candidate" onclick="selectCandidate(this, 'Cambio')">
+                <h2>Presidente 1</h2>
+                <img src=" C:/Users/USUARIO/Documents/proyecto/cambio.PNG">
+                <p>Cambio</p>
+            </div>
+            <!-- Repite este bloque para cada presidente -->
+            <div class="candidate" onclick="selectCandidate(this, 'Creo')">
+                <h2>Presidente 2</h2>
+                <img src=" C:/Users/USUARIO/Documents/proyecto/creo.PNG" >
+                <p>Creo</p>
+            </div>
+            <div class="candidate" onclick="selectCandidate(this, 'FCN')">
+                <h2>Presidente 3</h2>
+                <img src=" C:/Users/USUARIO/Documents/proyecto/FCN.PNG"  >
+                <p>FCN</p>
+            </div>
+            <!-- Repite este bloque para cada presidente -->
+            <div class="candidate" onclick="selectCandidate(this, 'Gana')">
+                <h2>Presidente 4</h2>
+                <img src=" C:/Users/USUARIO/Documents/proyecto/gana.PNG">
+                <p>Gana</p>
+            </div>
+            <div class="candidate" onclick="selectCandidate(this, 'Humanista')">
+                <h2>Presidente 5</h2>
+                <img src=" C:/Users/USUARIO/Documents/proyecto/human.PNG">
+                <p>Humanista</p>
+            </div>
+            <!-- Repite este bloque para cada presidente -->
+            <div class="candidate" onclick="selectCandidate(this, 'PAN')">
+                <h2>Presidente 6</h2>
+                <img src=" C:/Users/USUARIO/Documents/proyecto/pan.PNG"  >
+                <p>PAN</p>
+            </div>
+        </div>
+
+        <button id="btnPresidents" class="hidden" onclick="showPresidentsResults()">Ver Resultados</button>
+    </div>
+
+    <div id="pageDiputados" class="hidden">
+        <h1>Elecciones de Diputados</h1>
+
+        <div class="grid-container">
+            <div class="candidate" onclick="selectCandidate(this, 'Cambio')">
+                <h2>Diputado 1</h2>
+                <img src=" C:/Users/USUARIO/Documents/proyecto/cambio.PNG">
+                <p>Cambio</p>
+            </div>
+            <!-- Repite este bloque para cada diputado -->
+        <div class="candidate" onclick="selectCandidate(this, 'Creo')">
+                <h2>Diputado 2</h2>
+                <img src=" C:/Users/USUARIO/Documents/proyecto/creo.PNG" >
+                <p>Creo</p>
+            </div>
+        <div class="candidate" onclick="selectCandidate(this, 'FCN')">
+                <h2>Diputado 3</h2>
+                <img src=" C:/Users/USUARIO/Documents/proyecto/FCN.PNG"  >
+                <p>FCN</p>
+            </div>
+            <!-- Repite este bloque para cada diputado -->
+    <div class="candidate" onclick="selectCandidate(this, 'Gana')">
+                <h2>Diputado 4</h2>
+                <img src=" C:/Users/USUARIO/Documents/proyecto/gana.PNG">
+                <p>Gana</p>
+            </div>
+    <div class="candidate" onclick="selectCandidate(this, 'Humanista')">
+                <h2>Diputado 5</h2>
+                <img src=" C:/Users/USUARIO/Documents/proyecto/human.PNG">
+                <p>Humanista</p>
+            </div>
+            <!-- Repite este bloque para cada diputado -->
+            <div class="candidate" onclick="selectCandidate(this, 'PAN')">
+                <h2>Diputado 6</h2>
+                <img src=" C:/Users/USUARIO/Documents/proyecto/pan.PNG"  >
+                <p>PAN</p>
+            </div>
+        </div>
+
+        <button id="btnDiputados" class="hidden" onclick="showDiputadosResults()">Ver Resultados</button>
+    </div>
+
+    <div id="pageDistrito" class="hidden">
+        <h1>Elecciones de Diputados al Congreso Distrito Electoral</h1>
+
+        <div class="grid-container">
+    <div class="candidate" onclick="selectCandidate(this, 'Cambio')">
+                <h2>Diputado Distrito 1</h2>
+                <img src=" C:/Users/USUARIO/Documents/proyecto/cambio.PNG">
+                <p>Cambio</p>
+            </div>
+            <!-- Repite este bloque para cada diputado de distrito -->
+    <div class="candidate" onclick="selectCandidate(this, 'Creo')">
+                <h2>Diputado Distrito 2</h2>
+                <img src=" C:/Users/USUARIO/Documents/proyecto/creo.PNG" >
+                <p>Creo</p>
+            </div>
+    <div class="candidate" onclick="selectCandidate(this, 'FCN')">
+                <h2>Diputado Distrito 3</h2>
+                <img src=" C:/Users/USUARIO/Documents/proyecto/FCN.PNG"  >
+                <p>FCN</p>
+            </div>
+            <!-- Repite este bloque para cada diputado de distrito -->
+    <div class="candidate" onclick="selectCandidate(this, 'Gana')">
+                <h2>Diputado Distrito 4</h2>
+                <img src=" C:/Users/USUARIO/Documents/proyecto/gana.PNG">
+                <p>Gana</p>
+            </div>
+    <div class="candidate" onclick="selectCandidate(this, 'Humanista')">
+                <h2>Diputado Distrito 5</h2>
+                <img src=" C:/Users/USUARIO/Documents/proyecto/human.PNG">
+                <p>Humanista</p>
+            </div>
+    <div class="candidate" onclick="selectCandidate(this, 'PAN')">
+                <h2>Diputado Distrito 6</h2>
+                <img src=" C:/Users/USUARIO/Documents/proyecto/pan.PNG"  >
+                <p>PAN</p>
+            </div>   
+        </div>
+
+        <button id="btnDistrito" class="hidden" onclick="showDistritoResults()">Ver Resultados</button>
+    </div>
+
+    <div id="pageAlcalde" class="hidden">
+        <h1>Elecciones de Alcalde y Corporación Municipal</h1>
+
+        <div class="grid-container">
+            <div class="candidate" onclick="selectCandidate(this, 'Cambio')">
+                <h2>Alcalde 1</h2>
+                <img src=" C:/Users/USUARIO/Documents/proyecto/cambio.PNG">
+                <p>Cambio</p>
+            </div>
+            <div class="candidate" onclick="selectCandidate(this, 'Creo')">
+                <h2>Alcalde 2</h2>
+                <img src=" C:/Users/USUARIO/Documents/proyecto/creo.PNG" >
+                <p>Creo</p>
+            </div>
+        <div class="candidate" onclick="selectCandidate(this, 'FCN')">
+                <h2>Alcalde 3</h2>
+                <img src=" C:/Users/USUARIO/Documents/proyecto/FCN.PNG"  >
+                <p>FCN</p>
+            </div>
+      <div class="candidate" onclick="selectCandidate(this, 'Gana')">
+                <h2>Alcalde 4</h2>
+                <img src=" C:/Users/USUARIO/Documents/proyecto/gana.PNG">
+                <p>Gana</p>
+            </div>
+    <div class="candidate" onclick="selectCandidate(this, 'Humanista')">
+                <h2>Alcalde 5</h2>
+                <img src=" C:/Users/USUARIO/Documents/proyecto/human.PNG">
+                <p>Humanista</p>
+            </div>
+    <div class="candidate" onclick="selectCandidate(this, 'PAN')">
+                <h2>Alcalde 6</h2>
+                <img src=" C:/Users/USUARIO/Documents/proyecto/pan.PNG"  >
+                <p>PAN</p>
+            </div>
+        </div>
+
+        <button id="btnAlcalde" class="hidden" onclick="showAlcaldeResults()">Ver Resultados</button>
+    </div>
+
+    <div id="pageParlamento" class="hidden">
+        <h1>Elecciones de Diputados al Parlamento Centroamericano</h1>
+
+        <div class="grid-container">
+    <div class="candidate" onclick="selectCandidate(this, 'Cambio')">
+                <h2>Diputado Parlamento 1</h2>
+                <img src=" C:/Users/USUARIO/Documents/proyecto/cambio.PNG">
+                <p>Cambio</p>
+            </div>
+            <!-- Repite este bloque para cada diputado del Parlamento -->
+    <div class="candidate" onclick="selectCandidate(this, 'Creo')">
+                <h2>Diputado Parlamento 2</h2>
+                <img src=" C:/Users/USUARIO/Documents/proyecto/creo.PNG" >
+                <p>Creo</p>
+            </div>
+ <div class="candidate" onclick="selectCandidate(this, 'FCN')">
+                <h2>Diputado Parlamento 3</h2>
+                <img src=" C:/Users/USUARIO/Documents/proyecto/FCN.PNG"  >
+                <p>FCN</p>
+            </div>
+ <div class="candidate" onclick="selectCandidate(this, 'Gana')">
+                <h2>Diputado Parlamento 4</h2>
+                <img src=" C:/Users/USUARIO/Documents/proyecto/gana.PNG">
+                <p>Gana</p>
+            </div>
+ <div class="candidate" onclick="selectCandidate(this, 'Humanista')">
+                <h2>Diputado Parlamento 5</h2>
+                <img src=" C:/Users/USUARIO/Documents/proyecto/human.PNG">
+                <p>Humanista</p>
+            </div>
+            <!-- Repite este bloque para cada diputado del Parlamento -->
+  <div class="candidate" onclick="selectCandidate(this, 'PAN')">
+                <h2>Diputado Parlamento 6</h2>
+                <img src=" C:/Users/USUARIO/Documents/proyecto/pan.PNG"  >
+                <p>PAN</p>
+            </div>
+        </div>
+
+        <button id="btnParlamento" class="hidden" onclick="showParlamentoResults()">Ver Resultados</button>
+    </div>
+
+    <div id="pageResumen" class="hidden">
+        <h1>Resumen de Elecciones</h1>
+        <p>Resultados de las elecciones:</p>
+        <ul id="resultList"></ul>
+    </div>
+
+    <script>
+        var results = {};
+        var dpi;
+        var password;
+
+        function selectCandidate(element, candidateId) {
+            // Obtener todos los elementos con la clase "candidate"
+            var candidates = document.getElementsByClassName("candidate");
+
+            // Remover la clase "selected" de todos los elementos
+            for (var i = 0; i < candidates.length; i++) {
+                candidates[i].classList.remove("selected");
+            }
+
+            // Agregar la clase "selected" al elemento seleccionado
+            element.classList.add("selected");
+
+            // Habilitar el botón correspondiente según la página actual
+            var currentPage = getCurrentPage();
+            var btnId = "btn" + currentPage.charAt(0).toUpperCase() + currentPage.slice(1);
+            var btn = document.getElementById(btnId);
+            btn.classList.remove("hidden");
+
+            // Guardar el ID del candidato seleccionado en los resultados
+            results[currentPage] = candidateId;
+        }
+
+        function showPresidentsResults() {
+            // Redirigir a la página de Diputados
+            var pageDiputados = document.getElementById("pageDiputados");
+            var pagePresidents = document.getElementById("pagePresidents");
+            pageDiputados.classList.remove("hidden");
+            pagePresidents.classList.add("hidden");
+        }
+
+        function showDiputadosResults() {
+            // Redirigir a la página de Diputados al Congreso Distrito Electoral
+            var pageDistrito = document.getElementById("pageDistrito");
+            var pageDiputados = document.getElementById("pageDiputados");
+            pageDistrito.classList.remove("hidden");
+            pageDiputados.classList.add("hidden");
+        }
+
+        function showDistritoResults() {
+            // Redirigir a la página de Alcalde y Corporación Municipal
+            var pageAlcalde = document.getElementById("pageAlcalde");
+            var pageDistrito = document.getElementById("pageDistrito");
+            pageAlcalde.classList.remove("hidden");
+            pageDistrito.classList.add("hidden");
+        }
+
+        function showAlcaldeResults() {
+            // Redirigir a la página de Diputados al Parlamento Centroamericano
+            var pageParlamento = document.getElementById("pageParlamento");
+            var pageAlcalde = document.getElementById("pageAlcalde");
+            pageParlamento.classList.remove("hidden");
+            pageAlcalde.classList.add("hidden");
+        }
+
+        function showParlamentoResults() {
+            // Redirigir a la página de Resumen
+            var pageResumen = document.getElementById("pageResumen");
+            var pageParlamento = document.getElementById("pageParlamento");
+            pageResumen.classList.remove("hidden");
+            pageParlamento.classList.add("hidden");
+
+            // Mostrar los resultados en el resumen
+            var resultList = document.getElementById("resultList");
+            resultList.innerHTML = "";
+            for (var key in results) {
+                var listItem = document.createElement("li");
+                listItem.innerText = key + ": " + results[key];
+                resultList.appendChild(listItem);
+            }
+        }
+
+        function getCurrentPage() {
+            var pages = ["pagePresidents", "pageDiputados", "pageDistrito", "pageAlcalde", "pageParlamento"];
+            for (var i = 0; i < pages.length; i++) {
+                var page = document.getElementById(pages[i]);
+                if (!page.classList.contains("hidden")) {
+                    return pages[i].replace("page", "");
+                }
+            }
+        }
+
+        function submitLogin(event) {
+            event.preventDefault();
+            var dpiInput = document.getElementById("dpiInput");
+            var passwordInput = document.getElementById("passwordInput");
+            dpi = dpiInput.value;
+            password = passwordInput.value;
+            // Aquí puedes realizar acciones con el DPI y la contraseña ingresados, como validación, almacenamiento, etc.
+            console.log("DPI ingresado:", dpi);
+            console.log("Contraseña ingresada:", password);
+            dpiInput.value = ""; // Limpiar el campo de DPI después de enviarlo
+            passwordInput.value = ""; // Limpiar el campo de contraseña después de enviarlo
+
+            // Validar el DPI y la contraseña y mostrar las páginas correspondientes
+            if (validateDPI(dpi) && validatePassword(password)) {
+                var menuForm = document.getElementById("menuForm");
+                menuForm.classList.add("hidden");
+
+                // Mostrar la página de Elecciones de Presidentes
+                var pagePresidents = document.getElementById("pagePresidents");
+                pagePresidents.classList.remove("hidden");
+            } else {
+                alert("El DPI o la contraseña ingresados no son válidos. Por favor, inténtelo de nuevo.");
+            }
+        }
+
+        function validateDPI(dpi) {
+            // Realizar la validación del DPI aquí
+            // Puedes implementar tu propia lógica de validación según los requisitos
+            // En este ejemplo, se asume que cualquier DPI ingresado es válido
+            return true;
+        }
+
+        function validatePassword(password) {
+            // Realizar la validación de la contraseña aquí
+            // Puedes implementar tu propia lógica de validación según los requisitos
+            // En este ejemplo, se asume que la contraseña es "1234"
+            return password === "1234";
+        }
+    </script>
+</body>
+</html>
